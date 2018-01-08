@@ -173,16 +173,16 @@ class wmsAPICheck:
 if __name__ == '__main__':
     wms_jk_account = 'zhpwms_jk'
     wms_jk_password = 'zhpwms_jk123'
-    wms_url = '116.62.34.14:1521/orcldb'
-    # wms_url = '114.215.253.158:1521/orcldb'
+    # wms_url = '116.62.34.14:1521/orcldb'
+    wms_url = '114.215.253.158:1521/orcldb'
     SMTP_host_zp = 'smtp.zhoupu123.com'
     #SMTP_host_163 = 'smtp.163.com'
     from_account_zp = 'taodongkan@zhoupu123.com'
     #from_account_163 = 'taodongkan@163.com'
     from_password_zp = '1qaz!QAZ'
     #from_password_163 = ''
-    listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com']
-    #listMailSender = ['wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
+    # listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com']
+    listMailSender = ['wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
     subject = '现网WMS各回调接口巡检!'
     # 出库确认
     sql_outConfirm = '''
