@@ -19,7 +19,7 @@ class switchSAASLogin():
         driver.find_element_by_id("userName").send_keys(userName)
         driver.find_element_by_id("pwd").send_keys(password)
         driver.find_element_by_id("login_id").click()
-        time.sleep(3)
+        time.sleep(1)
 
     def getDestributor(self,distributor):
         salesMan = []
@@ -120,10 +120,10 @@ if __name__ == '__main__':
     saasAuto = switchSAASLogin()
     distributionGet = saasAuto.getDestributor(distributorInput)
     print distributionGet
-    saasAuto.login_saas(sysUrl, sysUserName, sysPassword)
-    saasAuto.openSettingMenu(distributionGet)
-    driver.close()
-    driver = webdriver.Chrome()
+    # saasAuto.login_saas(sysUrl, sysUserName, sysPassword)
+    # saasAuto.openSettingMenu(distributionGet)
+    # driver.close()
+    # driver = webdriver.Chrome()
     saasAuto.login_saas(sysUrl,oprUserName,oprPassword)
 
 

@@ -32,6 +32,7 @@ if __name__ == '__main__':
     driver = webdriver.Chrome()
     saasAuto = switchSAASLogin()
     dbSQL = saasAuto.getDestributorSQL(distributorInput) #获取cid后在common库sysorg表去查询手机号
+    # print dbSQL
     doVsMySQL = doVsMySQL()
     conMysql = doVsMySQL.connectMySQL(dbUrl_pre,dbUsr,dbPW,dbBase)
     getCursor = doVsMySQL.getCursor(conMysql)

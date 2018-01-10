@@ -34,6 +34,9 @@ class switchSAASLogin():
 
     #页面元素操作
     def openSettingMenu(self,driver,distributionGet):
+        # protocolElementPath=
+        driver.find_element_by_xpath("/html/body/div[16]/div/a[contains(@title,'关闭')]").click() #关闭协议
+        ActionChains(driver)
         saleElementPath = driver.find_element_by_xpath("//*[@id='mainMenu']/div[2]/div[1]/b")
         ActionChains(driver).move_to_element(saleElementPath).perform()                    #定位鼠标到一级菜单“设置”
         mouseClickjs = '''
@@ -41,7 +44,7 @@ class switchSAASLogin():
                           evObj.initMouseEvent("click",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
                           arguments[0].dispatchEvent(evObj);
                       '''
-        sysSetUserMenuPath = driver.find_element_by_xpath("/html/body/div[11]/div[5]/div")
+        sysSetUserMenuPath = driver.find_element_by_xpath("/html/body/div[contains(@class,'file-und-menu menu')]/div[contains(@url,'system/user/list')]/div[contains(@class,'menu-text')]")
         driver.execute_script(mouseClickjs, sysSetUserMenuPath)  # 定位鼠标到二级菜单“用户”并点击
         driver.switch_to.frame("system/user/list")
         time.sleep(1)

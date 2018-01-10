@@ -181,8 +181,8 @@ if __name__ == '__main__':
     #from_account_163 = 'taodongkan@163.com'
     from_password_zp = '1qaz!QAZ'
     #from_password_163 = ''
-    # listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com']
-    listMailSender = ['wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
+    listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com']
+    # listMailSender = ['864714820@qq.com','wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
     subject = '现网WMS各回调接口巡检!'
     # 出库确认
     sql_outConfirm = '''
