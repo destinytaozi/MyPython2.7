@@ -35,7 +35,7 @@ class switchSAASLogin():
     #页面元素操作
     def openSettingMenu(self,driver,distributionGet):
         # protocolElementPath=
-        driver.find_element_by_xpath("/html/body/div[16]/div/a[contains(@title,'关闭')]").click() #关闭协议
+        driver.find_element_by_xpath("/html/body/div[16]/div/a").click() #关闭协议
         ActionChains(driver)
         saleElementPath = driver.find_element_by_xpath("//*[@id='mainMenu']/div[2]/div[1]/b")
         ActionChains(driver).move_to_element(saleElementPath).perform()                    #定位鼠标到一级菜单“设置”

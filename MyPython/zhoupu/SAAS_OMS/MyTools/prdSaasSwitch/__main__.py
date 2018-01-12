@@ -26,17 +26,18 @@ if __name__ == '__main__':
     pwd = "aA111111"
 
     dbUrl_pre = "114.55.2.138"
+    #dbUrl_206 = "192.168.1.206"
     dbUsr = "root"
     dbPW = "qazWSX098"
-    dbBase = "saas_common_prd_0612"
+    dbBase = "gy_saas_common"
     driver = webdriver.Chrome()
     saasAuto = switchSAASLogin()
     dbSQL = saasAuto.getDestributorSQL(distributorInput) #获取cid后在common库sysorg表去查询手机号
-    # print dbSQL
     doVsMySQL = doVsMySQL()
-    conMysql = doVsMySQL.connectMySQL(dbUrl_pre,dbUsr,dbPW,dbBase)
+    conMysql = doVsMySQL.connectMySQL(dbUrl_206,dbUsr,dbPW,dbBase)
     getCursor = doVsMySQL.getCursor(conMysql)
     selectSQL = doVsMySQL.selectMySQL(getCursor,dbSQL)
+    print selectSQL
     distributionGet = selectSQL[0]
     saasAuto.login_saas(driver,sysUrl, sysUserName, sysPassword)
     saasAuto.openSettingMenu(driver,distributionGet)

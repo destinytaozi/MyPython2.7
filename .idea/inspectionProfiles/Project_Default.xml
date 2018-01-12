@@ -31,6 +31,10 @@
           <option value="MyPython.wms_API_check.msg_body" />
           <option value="MyPython.wms_API_check.montageStr" />
           <option value="property.*" />
+          <option value="guest.guest.urls.veiws" />
+          <option value="guest.guest.urls.sign" />
+          <option value="guest.guest.urls.django" />
+          <option value="urllib.request" />
         </list>
       </option>
     </inspection_tool>
