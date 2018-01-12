@@ -34,7 +34,7 @@ if __name__ == '__main__':
     saasAuto = switchSAASLogin()
     dbSQL = saasAuto.getDestributorSQL(distributorInput) #获取cid后在common库sysorg表去查询手机号
     doVsMySQL = doVsMySQL()
-    conMysql = doVsMySQL.connectMySQL(dbUrl_206,dbUsr,dbPW,dbBase)
+    conMysql = doVsMySQL.connectMySQL(dbUrl_pre,dbUsr,dbPW,dbBase)
     getCursor = doVsMySQL.getCursor(conMysql)
     selectSQL = doVsMySQL.selectMySQL(getCursor,dbSQL)
     print selectSQL
