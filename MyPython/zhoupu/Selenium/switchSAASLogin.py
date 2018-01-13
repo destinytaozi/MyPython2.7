@@ -120,10 +120,10 @@ if __name__ == '__main__':
     saasAuto = switchSAASLogin()
     distributionGet = saasAuto.getDestributor(distributorInput)
     print distributionGet
-    # saasAuto.login_saas(sysUrl, sysUserName, sysPassword)
-    # saasAuto.openSettingMenu(distributionGet)
-    # driver.close()
-    # driver = webdriver.Chrome()
+    saasAuto.login_saas(sysUrl, sysUserName, sysPassword)
+    saasAuto.openSettingMenu(distributionGet)
+    driver.close()
+    driver = webdriver.Chrome()
     saasAuto.login_saas(sysUrl,oprUserName,oprPassword)
 
 

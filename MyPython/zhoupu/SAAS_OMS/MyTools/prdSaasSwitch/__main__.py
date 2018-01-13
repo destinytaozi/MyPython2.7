@@ -29,7 +29,8 @@ if __name__ == '__main__':
     #dbUrl_206 = "192.168.1.206"
     dbUsr = "root"
     dbPW = "qazWSX098"
-    dbBase = "gy_saas_common"
+    dbBase = "gy_saas_common_prd_0612"
+    # dbBase = "gy_saas_common"
     driver = webdriver.Chrome()
     saasAuto = switchSAASLogin()
     dbSQL = saasAuto.getDestributorSQL(distributorInput) #获取cid后在common库sysorg表去查询手机号
