@@ -169,6 +169,46 @@ class wmsAPICheck:
         msg_all = msg_head + outconf +reGoodsConf + inconf + factoryConf  + lossConf + stockAdjust + msg_tree
         return msg_all
 
+    def assembSQL(self,listCount,str):
+        global assembNew,assemb
+        assembNew=''
+        assemb=''
+        for i in range(len(listCount)):
+            newCount = listCount[i][0]
+            wmsNewCount="'"+newCount+"',"
+            newCountall="'"+newCount[:-3]+"',"
+            assembNew+=newCountall
+            assemb+=wmsNewCount
+        assembNewLeast=assembNew[:-1]
+        if str =='出库':
+            infirmSQL = '''
+SELECT
+	omsId,
+	flowstate,
+    CASE WHEN flowState in ('10010','10020','10030','10200') THEN
+	'未出,不删除'
+    ELSE
+    '可以删除' END AS '标识'
+FROM t_bill_sale_order WHERE omsId IN (%s);
+            '''%(assembNewLeast)
+            return infirmSQL + assemb[:-1]
+        elif str == '进货':
+            # infirmSQL = '''
+            #                             SELECT
+            # 	                             omsId,
+            # 	                             flowstate,
+            #                                  CASE WHEN flowState in ('10010','10020','10030','10200') THEN
+            # 	                                 '未出,不删除'
+            #                                  ELSE
+            #                                      '可以删除' END AS '标识'
+            #                             FROM t_bill_sale_order WHERE omsId IN (%s);
+            #             ''' % (assembNewLeast)
+            return '待完善'
+        else:
+            return '非常用接口，手动查询'
+
+
+
 
 if __name__ == '__main__':
     wms_jk_account = 'zhpwms_jk'
@@ -181,7 +221,7 @@ if __name__ == '__main__':
     #from_account_163 = 'taodongkan@163.com'
     from_password_zp = '1qaz!QAZ'
     #from_password_163 = ''
-    listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com']
+    listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com']
     # listMailSender = ['864714820@qq.com','wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
     subject = '现网WMS各回调接口巡检!'
     # 出库确认
@@ -220,12 +260,21 @@ if __name__ == '__main__':
     lossConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_lossConfirm)
     stockAdjust = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_stockAdjust)
 
+    wmschk=wmsAPICheck()
+    print wmschk.assembSQL(outConfirm,'出库')
+    print wmschk.assembSQL(inConfirm,'进货')
+    print wmschk.assembSQL(factoryConfirm,'退厂')
+    print wmschk.assembSQL(reGoodsConfirm,'退货')
+    print wmschk.assembSQL(lossConfirm,'报损')
+    print wmschk.assembSQL(stockAdjust,'库存')
+
     # outConf = wms_API_check.montageStr(outConfirm, "出库确认")
     # reGoodsConf = wms_API_check.montageStr(reGoodsConfirm, "退货确认")
     # inConf = wms_API_check.montageStr(inConfirm, "入库确认")
     # factoryConf = wms_API_check.montageStr(factoryConfirm, "退厂确认")
     # lossConf = wms_API_check.montageStr(lossConfirm, "报损确认")
     # stockAdjust = wms_API_check.montageStr(stockAdjust, "调账确认")
+
     outConf = wmsAPICheck.montageStr(outConfirm, "出库确认(WTE_OM_DELIVER)")
     inConf = wmsAPICheck.montageStr(inConfirm, "入库确认(WTE_IM_CHECK)")
     factoryConf = wmsAPICheck.montageStr(factoryConfirm, "退厂确认(WTE_WM_DELIVER)")
