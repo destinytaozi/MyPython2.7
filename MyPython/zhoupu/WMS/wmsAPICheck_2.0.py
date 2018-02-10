@@ -158,7 +158,7 @@ class wmsAPICheck:
         return msg_all
 
     @classmethod
-    def montageMsg(cls, outconf, reGoodsConf, inconf, factoryConf, lossConf, stockAdjust):
+    def montageMsg(cls, outconf, reGoodsConf, inconf, factoryConf, lossConf,calcelR):
         msg_head = '''
                       <table color = "CCCC33" width = "500" border = "1" cellspacing = "0" cellpadding = "10" align = "left" >
                         <tr>
@@ -166,7 +166,7 @@ class wmsAPICheck:
                         </tr>        
                   '''
         msg_tree = '''</table>'''
-        msg_all = msg_head + outconf +reGoodsConf + inconf + factoryConf  + lossConf + stockAdjust + msg_tree
+        msg_all = msg_head + outconf +calcelR+reGoodsConf + inconf + factoryConf  + lossConf   + msg_tree
         return msg_all
 
     def assembSQL(self,listCount,str):
@@ -221,8 +221,8 @@ if __name__ == '__main__':
     #from_account_163 = 'taodongkan@163.com'
     from_password_zp = '1qaz!QAZ'
     #from_password_163 = ''
-    listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com']
-    # listMailSender = ['864714820@qq.com','wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
+    # listMailSender = ['864714820@qq.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com']
+    listMailSender = ['864714820@qq.com','wanghongxiang@zhoupu123.com','taodongkan@zhoupu123.com','shenhuanan@zhoupu123.com','zhangxurong@zhoupu123.com','wuchunping@zhoupu123.com']
     subject = '现网WMS各回调接口巡检!'
     # 出库确认
     sql_outConfirm = '''
@@ -253,20 +253,27 @@ if __name__ == '__main__':
               select * from (select  distinct(wa.plan_no),wa.owner_no ,wa.sdate,wa.sheetid from WTE_ADJUST wa  order by wa.sdate) where rownum<=30
     '''
 
+    # 出货订单取消回传
+    sql_calcelRes = '''
+            select * from (select  distinct(wocr.sourceexp_no),wocr.owner_no ,wocr.sdate,wocr.sheetid from WTE_OM_cancel_RESULT wocr order by wocr.sdate)
+    '''
+
     outConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_outConfirm)
     inConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_inConfirm)
     factoryConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_factoryConfirm)
     reGoodsConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_reGoodsConfirm)
     lossConfirm = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_lossConfirm)
-    stockAdjust = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_stockAdjust)
+    # stockAdjust = wmsAPICheck.doVSResult(wms_jk_account, wms_jk_password, wms_url, sql_stockAdjust)
+    calcelRes =wmsAPICheck.doVSResult(wms_jk_account,wms_jk_password,wms_url,sql_calcelRes)
 
-    wmschk=wmsAPICheck()
-    print wmschk.assembSQL(outConfirm,'出库')
-    print wmschk.assembSQL(inConfirm,'进货')
-    print wmschk.assembSQL(factoryConfirm,'退厂')
-    print wmschk.assembSQL(reGoodsConfirm,'退货')
-    print wmschk.assembSQL(lossConfirm,'报损')
-    print wmschk.assembSQL(stockAdjust,'库存')
+    # wmschk=wmsAPICheck()
+    # print wmschk.assembSQL(outConfirm,'出库')
+    # print wmschk.assembSQL(inConfirm,'进货')
+    # print wmschk.assembSQL(factoryConfirm,'退厂')
+    # print wmschk.assembSQL(reGoodsConfirm,'退货')
+    # print wmschk.assembSQL(lossConfirm,'报损')
+    # print wmschk.assembSQL(stockAdjust,'库存')
+    # print wmschk.assembSQL(calcelRes,'出库取消')
 
     # outConf = wms_API_check.montageStr(outConfirm, "出库确认")
     # reGoodsConf = wms_API_check.montageStr(reGoodsConfirm, "退货确认")
@@ -280,7 +287,8 @@ if __name__ == '__main__':
     factoryConf = wmsAPICheck.montageStr(factoryConfirm, "退厂确认(WTE_WM_DELIVER)")
     reGoodsConf = wmsAPICheck.montageStr(reGoodsConfirm, "退货确认(WTE_UM_CHECK)")
     lossConf = wmsAPICheck.montageStr(lossConfirm, "报损确认(WTE_LOST)")
-    stockAdjust = wmsAPICheck.montageStr(stockAdjust, "调账确认(WTE_ADJUST)")
+    # stockAdj = wmsAPICheck.montageStr(stockAdjust, "调账确认(WTE_ADJUST)")
+    calcelR = wmsAPICheck.montageStr(calcelRes,"出货取消(WTE_OM_CANCEL_RESULT)")
 
-    content = wmsAPICheck.montageMsg(outConf, reGoodsConf, inConf, factoryConf, lossConf, stockAdjust)
+    content = wmsAPICheck.montageMsg(outConf, reGoodsConf, inConf, factoryConf, lossConf,calcelR)
     wmsAPICheck.send_mail_2array(SMTP_host_zp, from_account_zp, from_password_zp, listMailSender, subject, content)
