@@ -154,7 +154,7 @@ class wmsAPICheck:
                            <tr>
                              <td align="center" colspan = "4">%s</td>
                             </tr>
-                       ''' % (api_description + "接口很干净，没有接口数据残留！")
+                       ''' % (api_description + "接口很干净，无数据残留！")
         return msg_all
 
     @classmethod
@@ -288,7 +288,7 @@ if __name__ == '__main__':
     reGoodsConf = wmsAPICheck.montageStr(reGoodsConfirm, "退货确认(WTE_UM_CHECK)")
     lossConf = wmsAPICheck.montageStr(lossConfirm, "报损确认(WTE_LOST)")
     # stockAdj = wmsAPICheck.montageStr(stockAdjust, "调账确认(WTE_ADJUST)")
-    calcelR = wmsAPICheck.montageStr(calcelRes,"出货取消(WTE_OM_CANCEL_RESULT)")
+    calcelR = wmsAPICheck.montageStr(calcelRes,"出库取消(WTE_OM_CANCEL_RESULT)")
 
     content = wmsAPICheck.montageMsg(outConf, reGoodsConf, inConf, factoryConf, lossConf,calcelR)
     wmsAPICheck.send_mail_2array(SMTP_host_zp, from_account_zp, from_password_zp, listMailSender, subject, content)
