@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:/Python35/workspace/DjMysite/.idea/DjMysite.iml" filepath="C:/Python35/workspace/DjMysite/.idea/DjMysite.iml" />
+      <module fileurl="file://C:/Python35/workspace/DjangoZP/.idea/DjangoZP.iml" filepath="C:/Python35/workspace/DjangoZP/.idea/DjangoZP.iml" />
+      <module fileurl="file://C:/Python35/workspace/MyPython35/.idea/MyPython35.iml" filepath="C:/Python35/workspace/MyPython35/.idea/MyPython35.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/workspace.iml" filepath="$PROJECT_DIR$/.idea/workspace.iml" />
+    </modules>
+  </component>
+</project>
